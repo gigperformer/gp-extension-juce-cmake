@@ -1,23 +1,17 @@
 @echo off
 
+:: Could be any of the Windows presets in CMakePresets.json
+set PRESET=windows-native
+
 :: Build configuration - could be "Debug" as well
 set BUILD_CONFIGURATION=Release
 set BUILD_DIR=build\%BUILD_CONFIGURATION%
 
-::Create a build directory if it's not already there
-mkdir %BUILD_DIR%
+:: Create the configuration file using cmake
+cmake -S . --preset %PRESET%
 
-::Change to the build directory
-cd %BUILD_DIR%
-
-::Create the configuration file using cmake
-cmake ..\..
-
-::Now build the project
-cmake --build . --config %BUILD_CONFIGURATION%
+:: Now build the project
+cmake --build --preset %PRESET% --config %BUILD_CONFIGURATION% --parallel
 
 :: Install the extension
-cmake --install . --config %BUILD_CONFIGURATION%
-
-::Go back to the starting folder
-cd ..\..
+cmake --install build\%PRESET% --config %BUILD_CONFIGURATION%
