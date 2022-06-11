@@ -1,12 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
-
-# These variables must be set BEFORE the project() call below.
-set(CMAKE_OSX_DEPLOYMENT_TARGET
-    "10.9"
-    CACHE STRING "The minimum version of macOS able to run the extension")
-set(CMAKE_OSX_ARCHITECTURES
-    "arm64;x86_64"
-    CACHE STRING "Target CPU architectures for macOS")
+cmake_minimum_required(VERSION 3.21)
 
 # language standard
 set(CMAKE_C_STANDARD 17)
@@ -45,7 +37,5 @@ target_compile_definitions(
 # Install the extension on the development machine
 install(
   TARGETS ${PROJECT_NAME}
-  LIBRARY DESTINATION "/Users/Shared/Gig Performer/Extensions"
-  RUNTIME
-    DESTINATION
-      "$ENV{SystemDrive}\\Users\\Public\\Documents\\Gig Performer\\Extensions")
+  LIBRARY DESTINATION "${GIG_PERFORMER_EXTENSIONS_DIRECTORY}"
+  RUNTIME DESTINATION "${GIG_PERFORMER_EXTENSIONS_DIRECTORY}")
