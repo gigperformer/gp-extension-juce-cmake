@@ -54,10 +54,10 @@ class LibMain : public gigperformer::sdk::GigPerformerAPI
         LogWindow::finalize();
     }
 
-    void OnGlobalPlayStateChanged(bool playing) override
+    void OnGlobalPlayStateChanged(double playing) override
     {
         juce::String log = "Playhead ";
-        log << (playing ? "playing" : "stopped");
+        log << ((playing > 0.0) ? "playing" : "stopped");
 
         LogWindow::showWindow();
         LogWindow::log(log);
